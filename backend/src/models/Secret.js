@@ -4,7 +4,6 @@ const secretSchema = new mongoose.Schema({
     path: { type: String, required: true, unique: true },
     text: { type: String, required: true },
     ip: { type: String },
-    createdAt: { type: Date, default: Date.now }
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model('Secret', secretSchema);
