@@ -1,0 +1,84 @@
+body.light-mode {
+    background-color: #ffffff;
+    color: #111111;
+
+    button {
+        color: #111111;
+    }
+
+    .header .refs {
+        a {
+            color: #111111;
+        }
+    }
+
+    .icon-button:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    input, textarea {
+        border-color: #111111;
+        background-color: #ffffff;
+        color: #111111;
+    }
+
+    main {
+        .secret-container {
+            div {
+                background-color: rgba(0, 0, 0, 0.08);
+                border-color: #111111;
+            }
+
+            input {
+                &.invalid {
+                    background-color: rgba(219, 39, 119, 0.25);
+                }
+
+                &::placeholder {
+                    color: rgba(0, 0, 0, 0.5);
+                }
+
+                @media (max-width: 600px) {
+                    border-left: 1px solid #111111 !important;
+                }
+            }
+
+            button {
+                background-color: rgba(0, 0, 0, 0.08);
+                border-color: #111111;
+
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.18);
+                }
+
+                &.active {
+                    color: #ffffff;
+                    background-color: rgba(0, 0, 0, 0.82);
+
+                    &:hover {
+                        background-color: rgba(0, 0, 0, 0.72);
+                    }
+                }
+            }
+        }
+    }
+
+    footer a {
+        color: #1a73e8;
+    }
+
+    #secretTextMenu {
+        &::before {
+            background: #111111;
+        }
+    }
+
+    #messageContainer {
+        background-color: #1a73e8;
+        color: #ffffff;
+
+        button {
+            color: #ffffff;
+        }
+    }
+}

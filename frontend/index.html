@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>notepad</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/src/styles/light-theme.css">
+    <link rel="stylesheet" href="/src/styles/responsiveness.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div id="mainContent"></div>
+    <div id="messageContainer" class="hidden">
+        <span id="messageText"></span>
+        <button class="icon-button" id="hideMessageButton" aria-label="Toggle Dark Mode">
+            <span class="material-icons">cancel</span>
+        </button>
+    </div>
+    <script type="module" src="/script.js"></script>
+    <script type="module" src="/src/services/routing.service.js"></script>
+    <script type="module" src="/src/services/theme.service.js"></script>
+    <script type="module" src="/src/services/message.service.js"></script>
+</body>
+</html>

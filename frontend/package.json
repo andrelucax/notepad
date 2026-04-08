@@ -1,0 +1,19 @@
+{
+  "name": "notepad",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "start": "http-server -c-1 -p 8080 --proxy http://localhost:8080?/",
+    "build": "rimraf dist && mkdir dist && npx cpy \"*.html\" dist && npx cpy \"*.css\" dist && npx cpy \"*.js\" dist && npx cpy \"src/**/*\" dist/src --recursive"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "cpy-cli": "^7.0.0",
+    "http-server": "^14.1.1",
+    "rimraf": "^6.1.3"
+  }
+}
