@@ -1,12 +1,11 @@
 import * as messageService from "../../services/message.service.js";
 import * as routingService from "../../services/routing.service.js"
+import API_BASE from "../../../configs/config.js"
 
 let secretTextInputHasUnsavedChanges = false;
 let debounceSecretTextInputTimer = null;
 let pollingSecretTextInputTimer = null;
 let lastServerUpdate = null;
-
-const API_BASE = 'http://localhost:3000';
 
 async function getSecretTextInputValueAsync() {
     try {
