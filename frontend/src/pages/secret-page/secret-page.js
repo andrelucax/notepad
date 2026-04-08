@@ -21,7 +21,7 @@ async function getSecretTextInputValueAsync() {
         clearTimeout(pollingSecretTextInputTimer);
         console.error(err);
         messageService.showMessage("Failed to retrieve secret.");
-        return '';
+        throw err;
     }
 }
 
