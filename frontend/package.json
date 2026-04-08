@@ -5,7 +5,7 @@
   "main": "script.js",
   "scripts": {
     "start": "http-server -c-1 -p 8080 --proxy http://localhost:8080?/",
-    "build": "rimraf dist && mkdir dist && npx cpy \"*.html\" dist && npx cpy \"*.css\" dist && npx cpy \"*.js\" dist && npx cpy \"src/**/*\" dist/src --recursive && npx cpy configs/config.prod.js dist/configs/config.js"
+    "build": "rimraf dist && mkdir dist && npx cpy \"*.html\" dist && npx cpy \"*.css\" dist && npx cpy \"*.js\" dist && npx cpy \"src/**/*\" dist/src --recursive && npx cpy configs/config.prod.js dist/configs/config.js && npx cpy \"assets/**/*\" dist/assets --recursive"
   },
   "keywords": [],
   "author": "",
