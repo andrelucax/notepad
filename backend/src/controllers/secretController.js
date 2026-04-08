@@ -35,7 +35,7 @@ exports.getSecret = async (req, res) => {
 
         res.json({
             text: secret?.text || '',
-            updatedAt: secret.updatedAt,
+            updatedAt: secret?.updatedAt || null,
             menu: Array.from(menuSet).sort(),
         });
 
