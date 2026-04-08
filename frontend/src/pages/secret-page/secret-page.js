@@ -5,7 +5,7 @@ let secretTextInputHasUnsavedChanges = false;
 let debounceSecretTextInputTimer = null;
 let pollingSecretTextInputTimer = null;
 
-const API_BASE = 'http://localhost:3000';
+const API_BASE = 'https://api.notepad.andrelucax.com';
 
 async function getSecretTextInputValueAsync() {
     try {
