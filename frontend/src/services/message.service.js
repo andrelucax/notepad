@@ -2,21 +2,26 @@ let messageContainer = null;
 let messageText = null;
 let hideTimeout = null;
 
-export function showMessage(message) {
+function cleanTimeout() {
     if (hideTimeout) {
         clearTimeout(hideTimeout);
         hideTimeout = null;
     }
+}
+
+export function showMessage(message, duration = 4000) {
+    cleanTimeout();
 
     messageText.textContent = message;
     messageContainer.classList.remove('hidden');
 
     setTimeout(() => {
         hideMessage();
-    }, 4000);
+    }, duration);
 }
 
 export function hideMessage() {
+    cleanTimeout();
     messageContainer.classList.add('hidden');
     messageText.textContent = '';
 }
