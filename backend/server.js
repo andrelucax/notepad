@@ -8,15 +8,11 @@ const app = express();
 
 app.use(express.json());
 
-if (process.env.DEBUG == "True") {
-    app.use(cors({
-        origin: 'http://localhost:8080'
-    }));
-} else {
-    app.use(cors({
-        origin: 'https://notepad.andrelucax.com'
-    }));
-}
+let origin = process.env.DEBUG == "True" ? '*' : 'https://notepad.andrelucax.com';
+
+app.use(cors({
+    origin: origin
+}));
 
 connectDB();
 
