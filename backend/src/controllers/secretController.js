@@ -58,7 +58,7 @@ exports.createSecret = async (req, res) => {
                 ip: clientIP
             },
             {
-                new: true,
+                returnDocument: 'after',
                 upsert: true
             }
         );
