@@ -4,8 +4,9 @@ import * as routingService from "../../services/routing.service.js"
 let secretTextInputHasUnsavedChanges = false;
 let debounceSecretTextInputTimer = null;
 let pollingSecretTextInputTimer = null;
+let lastServerUpdate = null;
 
-const API_BASE = 'https://api.notepad.andrelucax.com';
+const API_BASE = 'http://localhost:3000';
 
 async function getSecretTextInputValueAsync() {
     try {
@@ -16,25 +17,7 @@ async function getSecretTextInputValueAsync() {
         }
 
         const data = await response.json();
-
-        const secretTextMenu = document.getElementById('secretTextMenu');
-
-        secretTextMenu.innerHTML = '';
-
-        if (data.menu.length > 0) {
-            secretTextMenu.classList.remove('hidden');
-            data.menu.forEach(page => {
-                const link = document.createElement('a');
-                link.href = routingService.getNextSecretPageLocation(page);
-                link.textContent = page;
-    
-                secretTextMenu.appendChild(link);
-            });
-        } else {
-            secretTextMenu.classList.add('hidden');
-        }
-
-        return data.text || '';
+        return data;
     } catch (err) {
         clearTimeout(pollingSecretTextInputTimer);
         console.error(err);
@@ -75,20 +58,47 @@ function debounceSecretTextInputSave(value) {
     }, 2000);
 }
 
+function updateMenu(menuItems) {
+    const secretTextMenu = document.getElementById('secretTextMenu');
+    secretTextMenu.innerHTML = '';
+
+    if (menuItems.length > 0) {
+        secretTextMenu.classList.remove('hidden');
+        menuItems.forEach(page => {
+            const link = document.createElement('a');
+            link.href = routingService.getNextSecretPageLocation(page);
+            link.textContent = page;
+            secretTextMenu.appendChild(link);
+        });
+    } else {
+        secretTextMenu.classList.add('hidden');
+    }
+}
+
 export async function initAsync() {
     const secretTextInput = document.getElementById('secretTextInput');
     secretTextInput.focus();
-    secretTextInput.value = await getSecretTextInputValueAsync();
+
+    const initialData = await getSecretTextInputValueAsync();
+    secretTextInput.value = initialData.text;
+    lastServerUpdate = initialData.updatedAt;
+    updateMenu(initialData.menu);
 
     pollingSecretTextInputTimer = setInterval(async () => {
         if (!secretTextInputHasUnsavedChanges) {
-            secretTextInput.value = await getSecretTextInputValueAsync();
+            const serverData = await getSecretTextInputValueAsync();
+
+            if (!lastServerUpdate || new Date(serverData.updatedAt) > new Date(lastServerUpdate)) {
+                secretTextInput.value = serverData.text;
+                lastServerUpdate = serverData.updatedAt;
+            }
+
+            updateMenu(serverData.menu);
         }
     }, 2000);
 
     secretTextInput.addEventListener('input', () => {
         secretTextInputHasUnsavedChanges = true;
-        const value = secretTextInput.value.trim();
-        debounceSecretTextInputSave(value);
+        debounceSecretTextInputSave(secretTextInput.value);
     });
 }
