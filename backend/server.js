@@ -6,6 +6,8 @@ const secretRoutes = require('./src/routes/secretRoutes');
 
 const app = express();
 
+app.set('trust proxy', true);
+
 app.use(express.json());
 
 let origin = process.env.DEBUG == "True" ? '*' : 'https://notepad.andrelucax.com';

@@ -55,7 +55,7 @@ exports.createSecret = async (req, res) => {
             { path },
             {
                 text: req.body.text,
-                ip: clientIP
+                lastUpdatedByIp: clientIP
             },
             {
                 returnDocument: 'after',
